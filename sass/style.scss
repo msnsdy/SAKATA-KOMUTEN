@@ -29,13 +29,13 @@ main {
 
 .inner {
   margin: 0 auto;
-  width: $pc-inner;
-  @include mq("sp") {
-    width: $sp-inner;
-  }
+  max-width: $pc-inner;
+  width: 100%;
+  padding: 0 20px;
 
-  @include mq("tab") {
-    width: $tab-inner;
+  @media (max-width: 1024px) {
+    width: 100%;
+    padding: 0 20px;
   }
 }
 
@@ -46,7 +46,7 @@ img {
 .is-pc-hidden {
   display: none;
 
-  @media screen and (max-width: #{$pc-inner - 1px}) {
+  @media screen and (max-width: 1025px) {
     display: block;
   }
 }
@@ -59,12 +59,6 @@ img {
   }
 }
 
-.is-only-tab {
-  display: none;
-  @include mq('tab') {
-    display: block;
-  }
-}
 
 /*==========================================================================
 
@@ -131,12 +125,10 @@ img {
     border: solid 1px $secondary-color;
     transition: all 0.3s ease 0s;
 
-    @include mq("pc") {
-      &:hover {
-        background: $text-color;
-        color: $main-color;
-        transition: all 0.3s ease 0s;
-      }
+    &:hover {
+      background: $text-color;
+      color: $main-color;
+      transition: all 0.3s ease 0s;
     }
   }
 }
@@ -155,7 +147,7 @@ img {
   width: 100%;
   z-index: $header;
 
-  @media screen and (max-width: #{$pc-inner - 1px}) {
+  @media (max-width: 1024px) {
     height: 64px;
   }
 
@@ -163,6 +155,10 @@ img {
     align-items: center;
     display: flex;
     height: inherit;
+
+    @include mq('pc') {
+      padding: 0 10px;
+    }
   }
 
   &-logo {
@@ -171,12 +167,16 @@ img {
     @include mq("sp") {
       width: 114px;
     }
+
+    a:hover {
+      opacity: 0.7;
+    }
   }
 
   &-nav {
     margin-left: 32px;
 
-    @media screen and (max-width: #{$pc-inner - 1px}) {
+    @media (max-width: 1024px) {
       display: none;
     }
 
@@ -208,13 +208,15 @@ img {
       a {
         display: inline-block;
 
-        @include mq("pc") {
-          &:hover {
-            opacity: 0.7;
+        @include mq('pc') {
+          font-size: 14px;
+        }
 
-            .header-nav-sub-item {
-              opacity: 0.7;
-            }
+        &:hover {
+          opacity: 0.7;
+
+          .header-nav-sub-item {
+            opacity: 0.7;
           }
         }
       }
@@ -234,7 +236,7 @@ img {
     height: inherit;
     margin-left: 52px;
 
-    @media screen and (max-width: #{$pc-inner - 1px}) {
+    @media (max-width: 1024px) {
       display: none;
     }
 
@@ -243,10 +245,9 @@ img {
       padding: 24px 36px;
       color: $main-color;
       width: 100%;
-      @include mq("pc") {
-        &:hover {
-          opacity: 0.7;
-        }
+
+      &:hover {
+        opacity: 0.7;
       }
     }
   }
@@ -269,7 +270,7 @@ img {
     background-repeat: no-repeat;
     transform: rotate(360deg);
 
-    @media screen and (max-width: #{$pc-inner - 1px}) {
+    @media (max-width: 1024px) {
       display: block;
     }
 
@@ -379,83 +380,31 @@ img {
 .mv {
   background: url(../img/picture/top-image.jpg) no-repeat center center / cover;
   min-height: 900px;
-
+  
   @include mq("sp") {
     background: url(../img/picture/sp/top-image_sp.jpg) no-repeat center center / cover;
     min-height: 812px;
   }
-
+  
   &-inner {
-    width: 100%;
-
-    @include mq("sp") {
-      width: $sp-inner;
-    }
-  }
-
-  &-box {
-    color: $main-color;
-    display: inline-block;
-    padding: 0 108px 30px 0;
-    top: 24.9rem;
     position: relative;
-    margin-left: 13.8%;
+  }
 
-    @include mq("sp") {
-      padding: 0;
-      margin-left: 0;
-      left: 0;
-      top: 20.6rem;
+  &-text {
+    position: absolute;
+    top: 400px;
+    left: 0;
+
+    @include mq('sp') {
+      top: 350px;
     }
 
-    @include mq("tab") {
-      padding: 0 0 30px 0;
-      margin-right: 160px;
-      top: 20rem;
-    }
+    img {
+      max-width: 888px;
 
-    &::before {
-      background-color: $main-color;
-      bottom: 0;
-      box-shadow: 0px 0px 30.4px 9.6px rgba(#333333, 0.4);
-      content: "";
-      height: 1px;
-      left: 0;
-      position: absolute;
-      width: 100%;
-
-      @include mq("sp") {
-        bottom: -12px;
+      @include mq('sp') {
+        max-width: 89%;
       }
-    }
-  }
-
-  &-title {
-    font-size: 56px;
-    font-weight: $medium;
-    line-height: (80 / 56);
-    text-shadow: 0 0 30.4px rgba(#333333, 1), 0 0 30.4px rgba(#333333, 1);
-
-    @include mq("sp") {
-      font-size: 40px;
-      line-height: (56 / 40);
-    }
-  }
-
-  &-sub-title {
-    font-size: 36px;
-    font-weight: $medium;
-    margin-top: 15px;
-    text-shadow: 4px 4px 30.4px rgba(#333333, 1), 0 0 30.4px rgba(#333333, 1);
-
-    @include mq("sp") {
-      font-size: 24px;
-      line-height: (40 / 24);
-      margin-top: 1px;
-    }
-
-    @include mq("tab") {
-      line-height: 1.6;
     }
   }
 }
@@ -476,6 +425,7 @@ img {
   }
 
   &-wrapper {
+    margin-top: 49px;
     display: flex;
     flex-direction: row-reverse;
     justify-content: space-between;
@@ -559,11 +509,9 @@ img {
           width: 16px;
         }
 
-        @include mq("pc") {
-          &:hover {
-            opacity: 0.7;
-            transition: all 0.3s ease 0s;
-          }
+        &:hover {
+          opacity: 0.7;
+          transition: all 0.3s ease 0s;
         }
       }
     }
@@ -636,10 +584,6 @@ img {
       }
     }
 
-    @include mq("tab") {
-      // width: calc(33.3% - 15px / 3);
-    }
-
     @include mq("sp") {
       width: calc(50% - 15px / 2);
 
@@ -655,14 +599,10 @@ img {
       }
     }
 
-    a {
-      @include mq("pc") {
-        &:hover {
-          img {
-            transform: scale(1.1);
-            transition: all 0.5s ease 0s;
-          }
-        }
+    a:hover {
+      img {
+        transform: scale(1.1);
+        transition: all 0.5s ease 0s;
       }
     }
 
@@ -805,11 +745,9 @@ img {
         display: block;
       }
 
-      @include mq("pc") {
-        &:hover {
-          opacity: 0.7;
-          transition: all 0.3s ease 0s;
-        }
+      &:hover {
+        opacity: 0.7;
+        transition: all 0.3s ease 0s;
       }
     }
 
@@ -919,23 +857,30 @@ img {
     justify-content: center;
     margin-top: 51px;
 
-    @include mq("sp") {
+    @media (max-width: 719px)  {
       display: block;
+    }
+
+    @media (max-width: 599px) {
       margin-top: 36px;
     }
+
   }
 
   &-item {
     text-align: center;
-    @include mq("sp") {
+
+    @media (max-width: 719px) {
       display: flex;
       align-items: center;
+      justify-content: center;
     }
 
     &-title {
       background-repeat: no-repeat;
       font-size: 20px;
       padding-top: 74px;
+      
       @include mq("sp") {
         padding-top: 0;
         font-size: 16px;
@@ -951,7 +896,7 @@ img {
         background-position: bottom 38px center;
       }
 
-      @include mq("sp") {
+      @media (max-width: 719px) {
         padding: 0 0 32px 0;
         border-bottom: solid 1px #333333;
 
@@ -961,7 +906,7 @@ img {
         }
       }
 
-      @include mq("tab") {
+      @media (min-width: 720px) and (max-width: 1024px) {
         padding: 12px 35px 0 27px;
 
         .contact-item-title {
@@ -981,7 +926,7 @@ img {
         background-position: bottom 40px center;
       }
 
-      @include mq("sp") {
+      @media (max-width: 719px) {
         border-right: none;
         border-left: none;
         border-bottom: solid 1px #333333;
@@ -993,7 +938,7 @@ img {
         }
       }
 
-      @include mq("tab") {
+      @media (min-width: 720px) and (max-width: 1024px) {
         padding: 0 30px 27px 30px;
         .contact-item-title {
           background-position: bottom 64px center;
@@ -1008,7 +953,7 @@ img {
         background-position: bottom 38px center;
       }
 
-      @include mq("sp") {
+      @media (max-width: 719px) {
         padding: 12px 0;
 
         .contact-item-title {
@@ -1017,7 +962,7 @@ img {
         }
       }
 
-      @include mq("tab") {
+      @media (min-width: 720px) and (max-width: 1024px) {
         padding: 0 16px 30px 24px;
         .contact-item-title {
           background-position: bottom 63px center;
@@ -1026,9 +971,8 @@ img {
     }
 
     &-link {
-      margin-top: 23px;
-      @include mq("sp") {
-        margin-top: 0;
+      @media (min-width: 720px) {
+        margin-top: 23px;
       }
 
       a {
@@ -1036,21 +980,19 @@ img {
         display: inline-block;
         padding: 14px 32px 14px 33px;
         transition: all 0.3s ease 0s;
-        @include mq("sp") {
+        @media (max-width: 719px) {
           padding: 16px 30px 16px 27px;
         }
 
-        @include mq("pc") {
-          &:hover {
-            opacity: 0.8;
-            transition: all 0.3s ease 0s;
-          }
+        &:hover {
+          opacity: 0.8;
+          transition: all 0.3s ease 0s;
         }
       }
 
       &.-document {
 
-        @include mq('tab') {
+        @media (min-width: 720px) {
           margin-top: 35px;
         }
 
@@ -1061,12 +1003,21 @@ img {
 
       &.-mail,
       &.-tel {
+        @media (min-width: 720px) {
+          margin-top: 35px;
+        }
+
         a {
           background-color: $secondary-color;
         }
       }
 
       &.-mail {
+
+        @media (min-width: 720px) {
+          margin-top: 35px;
+        }
+
         a {
           @include mq("sp") {
             padding: 16px 29px 15px 27px;
@@ -1076,11 +1027,12 @@ img {
 
       &.-tel {
         margin-top: 19px;
+
         a {
           padding: 17px 46px;
           display: none;
 
-          @include mq("sp") {
+          @media (max-width: 719px) {
             display: inline-block;
             padding: 17px 44px 14px 42px;
           }
@@ -1092,7 +1044,7 @@ img {
       display: inline-block;
       font-size: 24px;
 
-      @include mq("sp") {
+      @media (max-width: 719px) {
         display: none;
       }
     }
@@ -1100,6 +1052,12 @@ img {
     &-open {
       font-size: 12px;
       margin-top: 6px;
+
+      & + p {
+        @media (max-width: 719px) {
+          display: none;
+        }
+      }
     }
   }
 }
@@ -1171,7 +1129,8 @@ img {
       &-list {
         display: flex;
         justify-content: center;
-        @include mq("sp") {
+
+        @media (max-width: 719px) {
           display: block;
         }
       }
@@ -1184,7 +1143,8 @@ img {
 
         &:not(:first-child) {
           border-left: solid 1px $main-color;
-          @include mq("sp") {
+
+          @media (max-width: 719px) {
             border-left: none;
             border-top: solid 1px $main-color;
           }
@@ -1192,35 +1152,40 @@ img {
 
         &:nth-child(1) {
           padding: 0 31px 0 21px;
-          @include mq("sp") {
+
+          @media (max-width: 719px){
             padding: 24px 0 22px;
           }
         }
 
         &:nth-child(2) {
           padding: 0 32px;
-          @include mq("sp") {
+
+          @media (max-width: 719px){
             padding: 24px 0 22px;
           }
         }
 
         &:nth-child(3) {
           padding: 0 32px 0 31px;
-          @include mq("sp") {
+
+          @media (max-width: 719px) {
             padding: 24px 0 22px;
           }
         }
 
         &:nth-child(4) {
           padding: 0 31px 0 33px;
-          @include mq("sp") {
+
+          @media (max-width: 719px) {
             padding: 24px 0 22px;
           }
         }
 
         &:nth-child(5) {
           padding: 0 7px 0 30px;
-          @include mq("sp") {
+
+          @media (max-width: 719px) {
             padding: 24px 0 22px;
           }
         }
@@ -1228,11 +1193,9 @@ img {
         a {
           transition: all 0.3s ease 0s;
 
-          @include mq("pc") {
-            &:hover {
-              opacity: 0.7;
-              transition: all 0.3s ease 0s;
-            }
+          &:hover {
+            opacity: 0.7;
+            transition: all 0.3s ease 0s;
           }
         }
       }
@@ -1260,6 +1223,7 @@ img {
 
       @include mq("sp") {
         margin: 0;
+        justify-content: center;
       }
 
       @include mq('tab') {
@@ -1291,11 +1255,9 @@ img {
       a {
         transition: all 0.3s ease 0s;
 
-        @include mq("pc") {
-          &:hover {
-            opacity: 0.7;
-            transition: all 0.3s ease 0s;
-          }
+        &:hover {
+          opacity: 0.7;
+          transition: all 0.3s ease 0s;
         }
       }
     }
