@@ -31,4 +31,11 @@ $(function() {
     $('.hamburger-box').removeClass('is-open');
     $("body").removeClass('fixed');
   });
+
+  /* ローディングアニメーション */
+  $(window).on('load', function () {
+    $('.loading').delay(900).fadeOut(800);
+    $('.loading-logo').delay(600).fadeOut(300);
+  });
+
 })
